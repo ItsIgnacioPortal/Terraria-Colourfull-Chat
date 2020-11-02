@@ -1,3 +1,5 @@
 pyperclip
 ahk
 colour
+lolpython
+pyfiglet

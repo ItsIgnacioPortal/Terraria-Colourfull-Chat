@@ -4,7 +4,9 @@ import time
 from ahk import AHK
 ahk = AHK()
 from colour import Color
-
+import os
+from lolpython import lol_py 
+from pyfiglet import Figlet
 
 #====================================================================================================================================
 #====================================================================================================================================
@@ -110,7 +112,7 @@ def keepMovin(workingMode, userText, terrariaRight, activeGradientColor, targetG
 
 
 	#Print generated text to the console
-	print(finalText)
+	print(finalText + "\nHas been copied to the clipboard!")
 
 	#Copy generated text to the clipboard
 	pyperclip.copy(finalText)
@@ -129,16 +131,23 @@ def keepMovin(workingMode, userText, terrariaRight, activeGradientColor, targetG
 
 def main():
 
-	yesno = ["yes", "no"]
 	terrariaRight = ""
 	activeGradientColor = Color("#ff0066")
 	targetGradientColor = Color("#ffffff")
 	userText = ""
+
+	#Make sure the title is as defined here, so the hotkey can function
+	os.system("Title TerrariaRainbowChat.py")
+
+	#Banner
+	lol_py(Figlet().renderText("Terraria Colourfull Chat"))
+
+	#Gradient or rainbow?
 	workingMode = selectWorkingMode()
 
-	while(terrariaRight not in yesno):
+	while(terrariaRight not in ["yes", "no"]):
 		terrariaRight = str(input("Is terraria on the right monitor?(yes/no): "))
-		if(terrariaRight not in yesno):
+		if(terrariaRight not in ["yes", "no"]):
 			print("Enter a valid answer!")
 
 	print("Enter 'EXIT' to exit." + 
