@@ -18,15 +18,18 @@ python3 -m pip install -r requirements.txt
 # Usage
 Usage is really intuitive (for the most part) if you have the hability to read :)
 
+Open your downloaded **.exe**
+
+OR, if you downloaded from source:
 `python3 TerrariaRainbowChat.py`
 
 1. Select the working mode
-2. Select the monitor on wich terraria is open
+2. Select the monitor on wich terraria is open (if you have only one monitor, answer anything, it won't break anything.)
 3. Select where the selected monitor is (in real life)
 4. Start using!
 
 After the text is generated, it will be automatically pasted into your clipboard. 
-This script will use [Auto Hot Key](https://www.autohotkey.com/) to automatically move your mouse to the Terraria window, and click it. I made this so the script would be faster to use while playing terraria. 
+This script will use [Auto Hot Key](https://www.autohotkey.com/) to automatically move your mouse to the Terraria window after generating text. I made this so the script would be faster to use while playing terraria. 
 
 # Customization
 By default the script has `red` as the **Active gradient colour**, and `white` as the **Target gradient colour**. What this means, is that the message's colour will start being red (Active gradient colour), and gradually go to white (Target gradient colour). If you want to change these colours you can type it's value in many many formats; This is thanks to the amazing [colour library](https://pypi.org/project/colour/). All the following are valid ways of typing the **black** colour:
