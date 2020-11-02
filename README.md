@@ -23,7 +23,7 @@ By default the script has `red` as the **Active gradient colour**, and `white` a
 * human color `black`
 
 # Example:
-The following is a message generated with this script:
+The following is a message generated with this script (Active gradient colour = green; Target gradient colour = white):
 `[c/008000:t][c/048401:h][c/078702:i][c/0b8a02:s] [c/149104:m][c/189405:e][c/1d9806:s][c/219b07:s][c/269e08:a][c/2ba109:g][c/30a40b:e] [c/3baa0d:w][c/40ad0f:a][c/45b010:s] [c/50b513:a][c/56b814:u][c/5cbb16:t][c/61bd18:o][c/67c019:m][c/6dc21b:a][c/73c51d:t][c/79c71f:i][c/7eca21:c][c/84cc22:a][c/8ace24:l][c/90d026:l][c/96d328:y] [c/a1d430:c][c/a5d335:r][c/aad339:e][c/aed23e:a][c/b2d243:t][c/b6d148:e][c/b9d14c:d] [c/c0d055:w][c/c3d05a:i][c/c6d05e:t][c/c8cf63:h] [c/cdcf6b:T][c/cfcf70:e][c/cfcd74:r][c/cfcb78:r][c/cfca7c:a][c/d0c980:r][c/d0c784:i][c/d0c788:a] [c/d1c590:C][c/d1c594:o][c/d2c598:l][c/d2c59c:o][c/d3c59f:u][c/d3c5a3:r][c/d4c6a7:f][c/d5c6aa:u][c/d5c7ae:l][c/d6c8b1:l] [c/d8cab8:C][c/d9ccbb:h][c/dacdbe:a][c/dbcec2:t] [c/ddd2c8:i][c/ded4cb:n] [c/e0d7d1:j][c/e2d9d4:u][c/e3dbd7:s][c/e4ddda:t] [c/e7e2df:a] [c/ebe6e5:f][c/ece8e7:e][c/eeebea:w] [c/f1efef:s][c/f3f2f1:e][c/f5f4f4:c][c/f7f6f6:o][c/f9f8f8:n][c/fbfbfb:d][c/fdfdfd:s][c/ffffff:!]`
 
 To view it, just copy it, open the terraria chat and press `CTRL + V` (paste) :)
