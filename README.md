@@ -14,7 +14,7 @@ Usage is really intuitive (for the most part) if you have the hability to read :
 
 At some point the script will ask you if you have opened Terraria on your right monitor. If you only have a single monitor connected, then answer whathever. But if you have two monitors, this script will use [Auto Hot Key](https://www.autohotkey.com/) to automatically move your mouse to the Terraria window, and click it. I made this so the script would be faster to use while playing terraria. 
 
-By default the script has `red` as the "Active gradient colour", and `white` as the "Target gradient colour". What this means, is that the message's colour will start being red (Active gradient colour), and gradually go to white (Target gradient colour). If you want to change these colours you can type it's value in many many formats; This is thanks to the amazing `[colour](https://pypi.org/project/colour/)` library. All the following are valid ways of typing the **black** colour:
+By default the script has `red` as the **Active gradient colour**, and `white` as the **Target gradient colour**. What this means, is that the message's colour will start being red (Active gradient colour), and gradually go to white (Target gradient colour). If you want to change these colours you can type it's value in many many formats; This is thanks to the amazing `[colour](https://pypi.org/project/colour/)` library. All the following are valid ways of typing the **black** colour:
 
 * RGB `rgb=(0, 0, 0)`
 * HSL `hsl=(0, 0.0, 0.0)`
