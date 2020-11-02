@@ -1,4 +1,6 @@
 # Terraria Colourfull Chat
+[![HitCount](http://hits.dwyl.com/pinkdev1/Terraria-Colourfull-Chat.svg)](http://hits.dwyl.com/pinkdev1/Terraria-Colourfull-Chat)    
+
 This is a script made in python 3.7 that aids users in quickly creating and sending colourfull chat messages. Whether that be using the random colours generator, or the gradient generator.
 
 # Installation
