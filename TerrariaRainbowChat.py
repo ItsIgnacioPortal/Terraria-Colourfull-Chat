@@ -128,6 +128,7 @@ def keepMovin(workingMode, userText, terrariaRight, activeGradientColor, targetG
 def getMonitorConf():
 	monitors = []
 	selectedMonitor = -1
+	monitorPos = ""
 
 	for monitor in get_monitors():
 		monitors.append(monitor)
@@ -150,9 +151,18 @@ def getMonitorConf():
 	except:
 		print("Invalid monitor selected!")
 
+	#Ask user where (irl) is the selected monitor
+	while(monitorPos not in ["left", "main", "right"]):
+
+		print("\tleft" + "\n\tmain" + "\n\tright")
+		monitorPos = input("Where (in real life) is the selected monitor?")
+
+		if(monitorPos not in ["left", "main", "right"]):
+			print("Invalid position selected!")
+
 	#Return array with the center coordinates of the selected monitor
 	#selectedMonitor-1 bc arrays start at 0, and during listing of the monitors we showed the monitors index with a +1
-	return [monitors[selectedMonitor-1].width / 2 ][monitors[selectedMonitor-1].height / 2 ]
+	return [monitors[selectedMonitor-1].width / 2 ][monitors[selectedMonitor-1].height / 2 ][monitorPos]
 
 #====================================================================================================================================
 #====================================================================================================================================
