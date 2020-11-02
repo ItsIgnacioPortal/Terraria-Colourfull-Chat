@@ -2,9 +2,9 @@
 This is a script made in python 3.7 that aids users in quickly creating and sending colourfull chat messages. Whether that be using the random colours generator, or the gradient generator.
 
 # Installation
-`git clone https://github.com/PinkDev1/Terraria-Colourfull-Chat.git`
-`cd Terraria-Colourfull-Chat`
-`python3 -m pip install -r requirements.txt`
+`git clone https://github.com/PinkDev1/Terraria-Colourfull-Chat.git`    
+`cd Terraria-Colourfull-Chat`    
+`python3 -m pip install -r requirements.txt`    
 
 # Usage
 Usage is really intuitive (for the most part) if you have the hability to read :)
