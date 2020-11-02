@@ -5,9 +5,9 @@ from ahk import AHK
 ahk = AHK()
 from colour import Color
 import os
-from lolpython import lol_py 
 from pyfiglet import Figlet
-
+from screeninfo import *
+from lolpython import lol_py
 #====================================================================================================================================
 #====================================================================================================================================
 #====================================================================================================================================
@@ -125,6 +125,35 @@ def keepMovin(workingMode, userText, terrariaRight, activeGradientColor, targetG
 	ahk.click()
 
 
+def getMonitorConf():
+	monitors = []
+	selectedMonitor = -1
+
+	for monitor in get_monitors():
+		monitors.append(monitor)
+	
+	print(len(monitors) + " monitors have been detected.")
+
+	#Show list of monitors with index
+	#for this function, all instances of range() that include "monitors" will have a +1 because the 2nd parameter on range() is exclusive
+	for monitorCount in range(0,len(monitors)+1):
+		print(str(monitorCount+1) + " - " + str(monitors[monitorCount]))
+	
+	#Ask user wich monitor to use
+	try:
+		while(selectedMonitor not in range(1,len(monitors+1))):
+			selectedMonitor = int(input("Wich monitor do you want to use?"))
+
+			if(selectedMonitor not in range(1,len(monitors+1))):
+				print("Invalid monitor selected!")
+
+	except:
+		print("Invalid monitor selected!")
+
+	#Return array with the center coordinates of the selected monitor
+	#selectedMonitor-1 bc arrays start at 0, and during listing of the monitors we showed the monitors index with a +1
+	return [monitors[selectedMonitor-1].width / 2 ][monitors[selectedMonitor-1].height / 2 ]
+
 #====================================================================================================================================
 #====================================================================================================================================
 #====================================================================================================================================
@@ -135,6 +164,7 @@ def main():
 	activeGradientColor = Color("#ff0066")
 	targetGradientColor = Color("#ffffff")
 	userText = ""
+	monitorConf = []
 
 	#Make sure the title is as defined here, so the hotkey can function
 	os.system("Title TerrariaRainbowChat.py")
@@ -145,10 +175,13 @@ def main():
 	#Gradient or rainbow?
 	workingMode = selectWorkingMode()
 
+	'''
 	while(terrariaRight not in ["yes", "no"]):
 		terrariaRight = str(input("Is terraria on the right monitor?(yes/no): "))
 		if(terrariaRight not in ["yes", "no"]):
 			print("Enter a valid answer!")
+	'''
+	monitorConf = getMonitorConf()
 
 	print("Enter 'EXIT' to exit." + 
 		"\nEnter 'ChangeWorkingMode' to change mode." + 
