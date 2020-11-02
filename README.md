@@ -38,3 +38,9 @@ The following is a message generated with this script (Active gradient colour = 
 `[c/008000:m][c/048401:s][c/098802:g] [c/129004:g][c/179405:e][c/1c9706:n][c/229b07:e][c/279f09:r][c/2da20a:a][c/33a60b:t][c/39a90d:e][c/3fac0e:d] [c/4cb312:b][c/52b613:y] [c/5fbc17:a] [c/6cc21b:s][c/73c51d:c][c/7ac81f:r][c/81ca21:i][c/88cd23:p][c/8ed026:t]: [c/a2d430:h][c/a7d336:t][c/acd23c:t][c/b0d241:p][c/b5d147:s]://[c/c4d05c:g][c/c7d061:i][c/cacf66:t][c/cdcf6b:h][c/cfcf70:u][c/cfcd75:b][c/cfcb79:.][c/d0c97e:c][c/d0c883:o][c/d0c787:m]/[c/d1c590:P][c/d1c595:i][c/d2c599:n][c/d2c59e:k][c/d3c5a2:D][c/d4c6a6:e][c/d5c6aa:v][c/d5c7ae:1]/[c/d7cab6:T][c/d8cbba:e][c/d9cdbe:r][c/dbcec1:r][c/dcd0c5:a][c/ddd2c9:r][c/ded4cc:i][c/e0d6d0:a][c/e1d9d3:-][c/e3dbd7:C][c/e4ddda:o][c/e6e0dd:l][c/e8e2e0:o][c/eae5e3:u][c/ece8e6:r][c/edeae9:f][c/efedec:u][c/f1f0ef:l][c/f4f2f2:l][c/f6f5f5:-][c/f8f7f7:C][c/fafafa:h][c/fdfdfd:a][c/ffffff:t]`
 
 To view it, just copy it, open the terraria chat and press `CTRL + V` (paste) :)
+
+# Building
+Previously this program used the pyfiglet library to generate the fancy banner, but [pyinstaller hates pyfiglet](https://stackoverflow.com/questions/36970026/pyinstaller-importerror-no-module-named-pyfiglet-fonts) so I decided to remove it and instead put the output into a string and just print that.
+
+To compile this yourself, just do:
+`pyinstaller --onefile --add-data "C:\Program Files\Python37\Lib\site-packages\ahk";ahk TerrariaRainbowChat.py`
