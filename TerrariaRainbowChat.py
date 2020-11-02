@@ -129,8 +129,6 @@ def keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGra
 	ahk.mouse_position = (monitorConf[0], monitorConf[1])
 	print("Moving mouse to terraria window..." + 
 		"\n[INFO]: Moved mouse to (" + str(monitorConf[0]) + " ;" + str(monitorConf[1]) + ")")
-	ahk.click()
-	print()
 
 
 #Function to get the user's monitor configuration. "On wich monitor is terraria?"
