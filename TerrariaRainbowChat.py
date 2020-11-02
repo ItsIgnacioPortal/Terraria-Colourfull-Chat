@@ -13,7 +13,8 @@ from lolpython import lol_py
 #====================================================================================================================================
 
 
-
+#Function let the user select the working mode
+#Returns an int that can be either 1 or 2. 1=Rainbow mode; 2=Gradient mode
 def selectWorkingMode():
 	workingMode = 0
 	#Let user pick a working mode
@@ -35,6 +36,8 @@ def selectWorkingMode():
 	return int(workingMode)
 
 
+#Function to let the user select the gradient colors to be used.
+#Returns an array of length=2 with the colors to be used [activeGradientColor, targetGradientColor]
 def modifyGradientColor(activeGradientColor, targetGradientColor):
 	newValue = ""
 	selectedGradientChange = 0
@@ -68,7 +71,7 @@ def modifyGradientColor(activeGradientColor, targetGradientColor):
 	return [activeGradientColor,targetGradientColor]
 	
 
-
+#Core functionality
 def keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGradientColor):
 
 	finalText = ""
@@ -129,6 +132,9 @@ def keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGra
 	ahk.click()
 	print()
 
+
+#Function to get the user's monitor configuration. "On wich monitor is terraria?"
+#Returns an array of length=2 that contains the center coordinates of the selected monitor [width, height]
 def getMonitorConf():
 	monitors = []
 	selectedMonitor = -1
