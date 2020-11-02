@@ -3,3 +3,4 @@ ahk
 colour
 lolpython
 pyfiglet
+screeninfo
