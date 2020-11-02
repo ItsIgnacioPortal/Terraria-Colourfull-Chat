@@ -6,7 +6,7 @@ ahk = AHK()
 from colour import Color
 import os
 from pyfiglet import Figlet
-from screeninfo import *
+from screeninfo import get_monitors
 from lolpython import lol_py
 #====================================================================================================================================
 #====================================================================================================================================
@@ -18,13 +18,18 @@ def selectWorkingMode():
 	workingMode = 0
 	#Let user pick a working mode
 	while(workingMode not in range(1,3)):
-		print("-------------------------"+
-			"\n1 - Rainbow mode" + 
-			"\n2 - Gradient mode" + 
-			"\n-------------------------")
-		workingMode = int(input("What mode do you want to run this script in?: "))
-		if(workingMode not in range(1,3)):
-			print("That's not a valid mode selection!")
+
+		try:
+			print("-------------------------"+
+				"\n1 - Rainbow mode" + 
+				"\n2 - Gradient mode" + 
+				"\n-------------------------")
+			workingMode = int(input("What mode do you want to run this script in?: "))
+			if(workingMode not in range(1,3)):
+				print("That's not a valid mode selection!")
+
+		except:
+			print("That's not a valid mode selection!!")
 	
 	#When a working mode has been selected succesfully...
 	return int(workingMode)
@@ -64,7 +69,7 @@ def modifyGradientColor(activeGradientColor, targetGradientColor):
 	
 
 
-def keepMovin(workingMode, userText, terrariaRight, activeGradientColor, targetGradientColor):
+def keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGradientColor):
 
 	finalText = ""
 	bannedCharacters = [" ", "/", "[", "]", ":"]
@@ -112,18 +117,17 @@ def keepMovin(workingMode, userText, terrariaRight, activeGradientColor, targetG
 
 
 	#Print generated text to the console
-	print(finalText + "\nHas been copied to the clipboard!")
+	print(finalText + "\nGenerated text been copied to the clipboard!")
 
 	#Copy generated text to the clipboard
 	pyperclip.copy(finalText)
 
 	#Activate the terraria window
-	if(terrariaRight == "yes"):
-		ahk.mouse_position = (100, 100)
-	else:
-		ahk.mouse_position = (-100, 100)
+	ahk.mouse_position = (monitorConf[0], monitorConf[1])
+	print("Moving mouse to terraria window..." + 
+		"\n[INFO]: Moved mouse to (" + str(monitorConf[0]) + " ;" + str(monitorConf[1]) + ")")
 	ahk.click()
-
+	print()
 
 def getMonitorConf():
 	monitors = []
@@ -133,36 +137,51 @@ def getMonitorConf():
 	for monitor in get_monitors():
 		monitors.append(monitor)
 	
-	print(len(monitors) + " monitors have been detected.")
+	print(str(len(monitors)) + " monitors have been detected.\n")
 
 	#Show list of monitors with index
 	#for this function, all instances of range() that include "monitors" will have a +1 because the 2nd parameter on range() is exclusive
-	for monitorCount in range(0,len(monitors)+1):
+	for monitorCount in range(0,len(monitors)):
 		print(str(monitorCount+1) + " - " + str(monitors[monitorCount]))
 	
 	#Ask user wich monitor to use
-	try:
-		while(selectedMonitor not in range(1,len(monitors+1))):
-			selectedMonitor = int(input("Wich monitor do you want to use?"))
+	while(selectedMonitor not in range(1,len(monitors)+1)):
+		try:
+			selectedMonitor = int(input("On wich monitor have you opened terraria?: "))
 
-			if(selectedMonitor not in range(1,len(monitors+1))):
+			if(selectedMonitor not in range(1,len(monitors)+1)):
 				print("Invalid monitor selected!")
 
-	except:
-		print("Invalid monitor selected!")
+		except:
+			print("Invalid monitor selected!!")
+		
+
 
 	#Ask user where (irl) is the selected monitor
-	while(monitorPos not in ["left", "main", "right"]):
+	while(monitorPos not in ["left", "center", "right"]):
 
-		print("\tleft" + "\n\tmain" + "\n\tright")
-		monitorPos = input("Where (in real life) is the selected monitor?")
+		print("-----------------------"+
+			"\n\tleft" + 
+			"\n\tcenter" + 
+			"\n\tright" + 
+			"\n-----------------------")
+		monitorPos = input("Where (in real life) is the selected monitor?: ")
 
-		if(monitorPos not in ["left", "main", "right"]):
+		if(monitorPos not in ["left", "center", "right"]):
 			print("Invalid position selected!")
 
-	#Return array with the center coordinates of the selected monitor
-	#selectedMonitor-1 bc arrays start at 0, and during listing of the monitors we showed the monitors index with a +1
-	return [monitors[selectedMonitor-1].width / 2 ][monitors[selectedMonitor-1].height / 2 ][monitorPos]
+	if(monitorPos=="left"):
+		#Return array with the center coordinates of the monitor on the left
+		return [((monitors[selectedMonitor-1].width / 2) - monitors[selectedMonitor-1].width),(monitors[selectedMonitor-1].height / 2 )]
+
+	elif(monitorPos=="center"):
+		#Return array with the center coordinates of the main monitor
+		#selectedMonitor-1 bc arrays start at 0, and during listing of the monitors we showed the monitors index with a +1
+		return [(monitors[selectedMonitor-1].width / 2 ),(monitors[selectedMonitor-1].height / 2)]
+
+	else:
+		#Return array with the center coordinates of the monitor on the right
+		return [((monitors[selectedMonitor-1].width / 2) + monitors[selectedMonitor-1].width),(monitors[selectedMonitor-1].height / 2 )]
 
 #====================================================================================================================================
 #====================================================================================================================================
@@ -170,7 +189,6 @@ def getMonitorConf():
 
 def main():
 
-	terrariaRight = ""
 	activeGradientColor = Color("#ff0066")
 	targetGradientColor = Color("#ffffff")
 	userText = ""
@@ -185,12 +203,6 @@ def main():
 	#Gradient or rainbow?
 	workingMode = selectWorkingMode()
 
-	'''
-	while(terrariaRight not in ["yes", "no"]):
-		terrariaRight = str(input("Is terraria on the right monitor?(yes/no): "))
-		if(terrariaRight not in ["yes", "no"]):
-			print("Enter a valid answer!")
-	'''
 	monitorConf = getMonitorConf()
 
 	print("Enter 'EXIT' to exit." + 
@@ -213,6 +225,6 @@ def main():
 			print("Goodbye!")
 		
 		else:
-			keepMovin(workingMode, userText, terrariaRight, activeGradientColor, targetGradientColor)
+			keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGradientColor)
 
 main()
