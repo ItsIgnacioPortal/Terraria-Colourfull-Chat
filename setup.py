@@ -50,10 +50,9 @@ def addDataRecursively(dataDir, folderName):
 	return allData
 
 
-ahkTemplatesDir = r"C:\Users\Claudio J. Pèrez\Documents\GitHub\terrariaColorfullChat\python37venv\Lib\site-packages\ahk\templates"
+ahkTemplatesDir = "C:\\Users\\%USERNAME%\\Documents\\GitHub\\terrariaColorfullChat\\python37venv\\Lib\\site-packages\\ahk\\templates"
 
 ahkTemplates = addCleanDataRecursively(ahkTemplatesDir, "templates")
-#ahkTemplates = ('templates',[r'C:\Users\Claudio J. Pèrez\Documents\GitHub\terrariaColorfullChat\python37venv\Lib\site-packages\ahk\templates\base.ahk']), ('templates',[r'C:\Users\Claudio J. Pèrez\Documents\GitHub\terrariaColorfullChat\python37venv\Lib\site-packages\ahk\templates\hotkey.ahk'])
 
 setup(
 		console=['TerrariaRainbowChat.py'],
