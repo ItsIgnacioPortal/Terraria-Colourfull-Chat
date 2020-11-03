@@ -8,7 +8,7 @@ def addCleanDataRecursively(dataDir, folderName):
 	#Purge all double quote (") characters
 	allCleanData = allCleanData.replace('\"', '')
 
-	#Replace triple \\\\ artifacts with \\
+	#Replace cuadruple \\\\ artifacts with \\
 	allCleanData = allCleanData.replace('\\\\\\\\','\\\\')
 
 	#Remove "[" at the start, and "]" at the end.
@@ -19,6 +19,7 @@ def addCleanDataRecursively(dataDir, folderName):
 	print(str(allCleanData))
 
 	return allCleanData
+
 
 #yeah, this is big brain time
 def addDataRecursively(dataDir, folderName):
@@ -50,7 +51,7 @@ def addDataRecursively(dataDir, folderName):
 	return allData
 
 
-ahkTemplatesDir = "C:\\Users\\%USERNAME%\\Documents\\GitHub\\terrariaColorfullChat\\python37venv\\Lib\\site-packages\\ahk\\templates"
+ahkTemplatesDir = "C:\\Users\\REPLACE-ME-WITH-YOUR-USERNAME\\Documents\\GitHub\\terrariaColorfullChat\\python37venv\\Lib\\site-packages\\ahk\\templates"
 
 ahkTemplates = addCleanDataRecursively(ahkTemplatesDir, "templates")
 
