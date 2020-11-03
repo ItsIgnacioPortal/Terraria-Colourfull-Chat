@@ -71,10 +71,9 @@ def modifyGradientColor(activeGradientColor, targetGradientColor):
 	
 
 #Core functionality
-def keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGradientColor):
+def keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGradientColor, bannedCharacters):
 
 	finalText = ""
-	bannedCharacters = [" ", "/", "[", "]", ":"]
 
 	#If using gradient working mode...
 	if(workingMode == 2):
@@ -196,22 +195,25 @@ def main():
 	targetGradientColor = Color("#ffffff")
 	userText = ""
 	monitorConf = []
+	bannedCharacters = [" ", "/", "[", "]", ":"]
+	depuratedUserText = ""
+	bannedCharactersCounter = 0
 
 	#Make sure the title is as defined here, so the hotkey can function
 	os.system("Title TerrariaRainbowChat.py")
 
 	#Banner
-	banner=(" _____                        _" + 
-	"\n|_   _|__ _ __ _ __ __ _ _ __(_) __ _" + 
-	"\n  | |/ _ \ '__| '__/ _` | '__| |/ _` |" + 
-	"\n  | |  __/ |  | | | (_| | |  | | (_| |" + 
-	"\n  |_|\___|_|  |_|  \__,_|_|  |_|\__,_|" + 
+	banner=(r" _____                        _" + 
+	"\n" + r"|_   _|__ _ __ _ __ __ _ _ __(_) __ _" + 
+	"\n" + r"  | |/ _ \ '__| '__/ _` | '__| |/ _` |" + 
+	"\n" + r"  | |  __/ |  | | | (_| | |  | | (_| |" + 
+	"\n" + r"  |_|\___|_|  |_|  \__,_|_|  |_|\__,_|" + 
 	"\n" + 
-	"\n  ____      _                   __       _ _    ____ _           _" + 
-	"\n / ___|___ | | ___  _   _ _ __ / _|_   _| | |  / ___| |__   __ _| |_" + 
-	"\n| |   / _ \| |/ _ \| | | | '__| |_| | | | | | | |   | '_ \ / _` | __|" + 
-	"\n| |__| (_) | | (_) | |_| | |  |  _| |_| | | | | |___| | | | (_| | |_" + 
-	"\n \____\___/|_|\___/ \__,_|_|  |_|  \__,_|_|_|  \____|_| |_|\__,_|\__|" + 
+	"\n" + r"  ____      _                   __       _ _    ____ _           _" + 
+	"\n" + r" / ___|___ | | ___  _   _ _ __ / _|_   _| | |  / ___| |__   __ _| |_" + 
+	"\n" + r"| |   / _ \| |/ _ \| | | | '__| |_| | | | | | | |   | '_ \ / _` | __|" + 
+	"\n" + r"| |__| (_) | | (_) | |_| | |  |  _| |_| | | | | |___| | | | (_| | |_" + 
+	"\n" + r" \____\___/|_|\___/ \__,_|_|  |_|  \__,_|_|_|  \____|_| |_|\__,_|\__|" + 
 	"\n")
 	lol_py(banner)
 
@@ -227,6 +229,21 @@ def main():
 	#Loop it until the user wants to exit
 	while(userText != "EXIT"):
 		userText = input("Enter your text: ")
+		
+		#Restart the contents of depuratedUserText
+		depuratedUserText = ""
+		#Restart this counter
+		bannedCharactersCounter = 0
+
+		#Depurate the user text, for processing later.. 
+		#(remove all banned characters)
+		for character in range(0,len(userText)):
+			if(userText[character] not in bannedCharacters):
+				depuratedUserText += str(userText[character])
+			
+			else:
+				bannedCharactersCounter += 1
+		
 
 		if(userText == "ChangeWorkingMode"):
 			workingMode = selectWorkingMode()
@@ -239,7 +256,15 @@ def main():
 		elif(userText == "EXIT"):
 			print("Goodbye!")
 		
-		else:
-			keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGradientColor)
+		#Some servers handle long chat strings poorly, and might kick the player
+		#Therefor, it's this script's duty to ensure no strings over-the-limit are generated
+		#one character coverted to it's equivalent in hex color for terraria is * 12 it's original size.
+		#During testing, the maximum length of the strings terraria servers could take b4 kicking the player is of 992 characters. OR: 82 characters with colors + 7 unformatted characters.
+		elif(len(depuratedUserText) <= 82 and bannedCharactersCounter <= 7):
+			keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGradientColor, bannedCharacters)
 
+		else:
+			print("The string you entered is too long! No conversion will be made." + 
+				"\n The string you entered had " + str(len(depuratedUserText)) + " valid characters, and " + str(bannedCharactersCounter) + " banned characters." 
+				"\n For info in this limitation, refer to the README.md")
 main()
