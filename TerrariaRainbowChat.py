@@ -1,11 +1,13 @@
 import random
 import pyperclip
-import time
 from ahk import AHK
 ahk = AHK()
 from colour import Color
+<<<<<<< Updated upstream
 import os
 from pyfiglet import Figlet
+=======
+>>>>>>> Stashed changes
 from screeninfo import get_monitors
 from lolpython import lol_py
 #====================================================================================================================================
@@ -200,8 +202,6 @@ def main():
 	userText = ""
 	monitorConf = []
 
-	#Make sure the title is as defined here, so the hotkey can function
-	os.system("Title TerrariaRainbowChat.py")
 
 	#Banner
 	lol_py(Figlet().renderText("Terraria Colourfull Chat"))
