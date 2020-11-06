@@ -9,11 +9,11 @@ def addCleanDataRecursively(dataDir, folderName):
 	allCleanData = allCleanData.replace('\"', '')
 
 	#Replace cuadruple \\\\ artifacts with \\
-	allCleanData = allCleanData.replace('\\\\\\\\','\\\\')
+	allCleanData = allCleanData.replace('\\\\','\\')
 
 	#Remove "[" at the start, and "]" at the end.
 	#These characters were added for some reason
-	allCleanData = (allCleanData[1:])[:-1]
+	#allCleanData = (allCleanData[1:])[:-1]
 
 	print("\n\nData has been purged. The new data is: \n\n")
 	print(str(allCleanData))
@@ -51,15 +51,27 @@ def addDataRecursively(dataDir, folderName):
 	return allData
 
 
-ahkTemplatesDir = "C:\\Users\\REPLACE-ME-WITH-YOUR-USERNAME\\Documents\\GitHub\\terrariaColorfullChat\\python37venv\\Lib\\site-packages\\ahk\\templates"
+useAHK = input("Do you want to build this with AHK included? (y/n): ")
 
-ahkTemplates = addCleanDataRecursively(ahkTemplatesDir, "templates")
+if(useAHK == "y"):
+	ahkTemplatesDir = str(input("Enter the location of the templates folder in the AHK library (full path): "))
 
-setup(
-		console=['TerrariaRainbowChat.py'],
-		options = {'py2exe': {'bundle_files': 1, 'compressed': True, 'optimize': 2}},
-		zipfile = None,
-		data_files = ahkTemplates,
-		name='Terraria Colourfull Chat',
-		version='1.0.2',
-	)
+	ahkTemplates = addCleanDataRecursively(ahkTemplatesDir, "templates")
+
+	print("Good luck.")
+	setup(
+			console=['TerrariaRainbowChat.py'],
+			options = {'py2exe': {'bundle_files': 1, 'compressed': True, 'optimize': 2}},
+			zipfile = None,
+			data_files = ahkTemplates,
+			name='Terraria Colourfull Chat',
+			version='1.0.2',
+		)
+else:
+	setup(
+			console=['TerrariaRainbowChat.py'],
+			options = {'py2exe': {'bundle_files': 1, 'compressed': True, 'optimize': 2, 'excludes': 'AHK'}},
+			zipfile = None,
+			name='Terraria Colourfull Chat',
+			version='1.0.2',
+		)

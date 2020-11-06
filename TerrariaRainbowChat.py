@@ -1,10 +1,16 @@
 import random
 import pyperclip
-from ahk import AHK
-ahk = AHK()
+import sys
 from colour import Color
 from screeninfo import get_monitors
 from lolpython import lol_py
+
+from ahk import AHK
+if(AHK in sys.modules):
+	ahk = AHK()
+	ahkImported = True
+else:
+	ahkImported = False
 #====================================================================================================================================
 #====================================================================================================================================
 #====================================================================================================================================
@@ -122,12 +128,11 @@ def keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGra
 	#Copy generated text to the clipboard
 	pyperclip.copy(finalText)
 
-	#Activate the terraria window
-	ahk.mouse_position = (monitorConf[0], monitorConf[1])
-	print("Moving mouse to terraria window..." + 
-		"\n[INFO]: Moved mouse to (" + str(monitorConf[0]) + " ;" + str(monitorConf[1]) + ")")
-	ahk.click()
-	print()
+	if(ahkImported):
+		#Activate the terraria window
+		ahk.mouse_position = (monitorConf[0], monitorConf[1])
+		print("Moving mouse to terraria window..." + 
+			"\n[INFO]: Moved mouse to (" + str(monitorConf[0]) + " ;" + str(monitorConf[1]) + ")")
 
 
 #Function to get the user's monitor configuration. "On wich monitor is terraria?"
@@ -197,9 +202,20 @@ def main():
 	userText = ""
 	monitorConf = []
 
-
 	#Banner
-	lol_py(Figlet().renderText("Terraria Colourfull Chat"))
+	banner=(r" _____                        _" + 
+	"\n" + r"|_   _|__ _ __ _ __ __ _ _ __(_) __ _" + 
+	"\n" + r"  | |/ _ \ '__| '__/ _` | '__| |/ _` |" + 
+	"\n" + r"  | |  __/ |  | | | (_| | |  | | (_| |" + 
+	"\n" + r"  |_|\___|_|  |_|  \__,_|_|  |_|\__,_|" + 
+	"\n" + 
+	"\n" + r"  ____      _                   __       _ _    ____ _           _" + 
+	"\n" + r" / ___|___ | | ___  _   _ _ __ / _|_   _| | |  / ___| |__   __ _| |_" + 
+	"\n" + r"| |   / _ \| |/ _ \| | | | '__| |_| | | | | | | |   | '_ \ / _` | __|" + 
+	"\n" + r"| |__| (_) | | (_) | |_| | |  |  _| |_| | | | | |___| | | | (_| | |_" + 
+	"\n" + r" \____\___/|_|\___/ \__,_|_|  |_|  \__,_|_|_|  \____|_| |_|\__,_|\__|" + 
+	"\n")
+	lol_py(banner)
 
 	#Gradient or rainbow?
 	workingMode = selectWorkingMode()
