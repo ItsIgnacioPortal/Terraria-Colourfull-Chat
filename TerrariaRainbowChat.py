@@ -3,11 +3,6 @@ import pyperclip
 from ahk import AHK
 ahk = AHK()
 from colour import Color
-<<<<<<< Updated upstream
-import os
-from pyfiglet import Figlet
-=======
->>>>>>> Stashed changes
 from screeninfo import get_monitors
 from lolpython import lol_py
 #====================================================================================================================================
