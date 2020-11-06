@@ -1,12 +1,17 @@
 import random
 import pyperclip
-import time
-from ahk import AHK
-ahk = AHK()
+import sys
 from colour import Color
 import os
 from screeninfo import get_monitors
 from lolpython import lol_py
+
+from ahk import AHK
+if(AHK in sys.modules):
+	ahk = AHK()
+	ahkImported = True
+else:
+	ahkImported = False
 #====================================================================================================================================
 #====================================================================================================================================
 #====================================================================================================================================
@@ -123,10 +128,12 @@ def keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGra
 	#Copy generated text to the clipboard
 	pyperclip.copy(finalText)
 
-	#Activate the terraria window
-	ahk.mouse_position = (monitorConf[0], monitorConf[1])
-	print("Moving mouse to terraria window..." + 
-		"\n[INFO]: Moved mouse to (" + str(monitorConf[0]) + " ;" + str(monitorConf[1]) + ")")
+
+	if(ahkImported):
+		#Activate the terraria window
+		ahk.mouse_position = (monitorConf[0], monitorConf[1])
+		print("Moving mouse to terraria window..." + 
+			"\n[INFO]: Moved mouse to (" + str(monitorConf[0]) + " ;" + str(monitorConf[1]) + ")")
 
 
 #Function to get the user's monitor configuration. "On wich monitor is terraria?"
@@ -198,9 +205,6 @@ def main():
 	bannedCharacters = [" ", "/", "[", "]", ":"]
 	depuratedUserText = ""
 	bannedCharactersCounter = 0
-
-	#Make sure the title is as defined here, so the hotkey can function
-	os.system("Title TerrariaRainbowChat.py")
 
 	#Banner
 	banner=(r" _____                        _" + 
