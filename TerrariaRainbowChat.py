@@ -2,6 +2,7 @@ import random
 import pyperclip
 import sys
 from colour import Color
+import os
 from screeninfo import get_monitors
 from lolpython import lol_py
 
@@ -75,10 +76,9 @@ def modifyGradientColor(activeGradientColor, targetGradientColor):
 	
 
 #Core functionality
-def keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGradientColor):
+def keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGradientColor, bannedCharacters):
 
 	finalText = ""
-	bannedCharacters = [" ", "/", "[", "]", ":"]
 
 	#If using gradient working mode...
 	if(workingMode == 2):
@@ -127,6 +127,7 @@ def keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGra
 
 	#Copy generated text to the clipboard
 	pyperclip.copy(finalText)
+
 
 	if(ahkImported):
 		#Activate the terraria window
@@ -201,6 +202,9 @@ def main():
 	targetGradientColor = Color("#ffffff")
 	userText = ""
 	monitorConf = []
+	bannedCharacters = [" ", "/", "[", "]", ":"]
+	depuratedUserText = ""
+	bannedCharactersCounter = 0
 
 	#Banner
 	banner=(r" _____                        _" + 
@@ -229,6 +233,21 @@ def main():
 	#Loop it until the user wants to exit
 	while(userText != "EXIT"):
 		userText = input("Enter your text: ")
+		
+		#Restart the contents of depuratedUserText
+		depuratedUserText = ""
+		#Restart this counter
+		bannedCharactersCounter = 0
+
+		#Depurate the user text, for processing later.. 
+		#(remove all banned characters)
+		for character in range(0,len(userText)):
+			if(userText[character] not in bannedCharacters):
+				depuratedUserText += str(userText[character])
+			
+			else:
+				bannedCharactersCounter += 1
+		
 
 		if(userText == "ChangeWorkingMode"):
 			workingMode = selectWorkingMode()
@@ -241,7 +260,15 @@ def main():
 		elif(userText == "EXIT"):
 			print("Goodbye!")
 		
-		else:
-			keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGradientColor)
+		#Some servers handle long chat strings poorly, and might kick the player
+		#Therefor, it's this script's duty to ensure no strings over-the-limit are generated
+		#one character coverted to it's equivalent in hex color for terraria is * 12 it's original size.
+		#During testing, the maximum length of the strings terraria servers could take b4 kicking the player is of 992 characters. OR: 82 characters with colors + 7 unformatted characters.
+		elif(len(depuratedUserText) <= 82 and bannedCharactersCounter <= 7):
+			keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGradientColor, bannedCharacters)
 
+		else:
+			print("The string you entered is too long! No conversion will be made." + 
+				"\n The string you entered had " + str(len(depuratedUserText)) + " valid characters, and " + str(bannedCharactersCounter) + " banned characters." 
+				"\n For info in this limitation, refer to the README.md")
 main()
