@@ -48,7 +48,9 @@ The following is a message generated with this script (Active gradient colour = 
 To view it, just copy it, open the terraria chat and press `CTRL + V` (paste) :)
 
 # Building
-Previously this program used the pyfiglet library to generate the fancy banner, but [pyinstaller hates pyfiglet](https://stackoverflow.com/questions/36970026/pyinstaller-importerror-no-module-named-pyfiglet-fonts) so I decided to remove it and instead put the output into a string and just print that.
 
 To compile this yourself, just do:
-`pyinstaller --onefile --add-data "C:\Program Files\Python37\Lib\site-packages\ahk";ahk TerrariaRainbowChat.py`
+`py -3.7 setup.py py2exe`
+
+The command above uses python 3.7, but any python >= 3.7 should work.
+If you want to compile it with the AHK implementation, brace yourself.
