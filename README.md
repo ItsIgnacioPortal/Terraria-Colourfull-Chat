@@ -29,7 +29,7 @@ OR, if you downloaded from source:
 4. Start using!
 
 After the text is generated, it will be automatically pasted into your clipboard. 
-This script will use [Auto Hot Key](https://www.autohotkey.com/) to automatically move your mouse to the Terraria window after generating text. I made this so the script would be faster to use while playing terraria. 
+(If running from source) This script will use [Auto Hot Key](https://www.autohotkey.com/) to automatically move your mouse to the Terraria window after generating text. This was made so the script would be faster to use while playing terraria. If you're running the EXE version, your mouse won't be moved automatically. 
 
 # Customization
 By default the script has `red` as the **Active gradient colour**, and `white` as the **Target gradient colour**. What this means, is that the message's colour will start being red (Active gradient colour), and gradually go to white (Target gradient colour). If you want to change these colours you can type it's value in many many formats; This is thanks to the amazing [colour library](https://pypi.org/project/colour/). All the following are valid ways of typing the **black** colour:
