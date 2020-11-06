@@ -61,7 +61,7 @@ if(useAHK == "y"):
 	print("Good luck.")
 	setup(
 			console=['TerrariaRainbowChat.py'],
-			options = {'py2exe': {'bundle_files': 1, 'compressed': True, 'optimize': 2}},
+			options = {'py2exe': {'bundle_files': 1, 'compressed': True, 'optimize': 2,"dll_excludes": ["libcrypto-1_1.dll", "libssl-1_1.dll"]}},
 			zipfile = None,
 			data_files = ahkTemplates,
 			name='Terraria Colourfull Chat',
@@ -70,7 +70,7 @@ if(useAHK == "y"):
 else:
 	setup(
 			console=['TerrariaRainbowChat.py'],
-			options = {'py2exe': {'bundle_files': 1, 'compressed': True, 'optimize': 2, 'excludes': 'AHK'}},
+			options = {'py2exe': {'bundle_files': 1, 'compressed': True, 'optimize': 2, 'excludes': 'AHK', "dll_excludes": ["libcrypto-1_1.dll"]}},
 			zipfile = None,
 			name='Terraria Colourfull Chat',
 			version='1.0.2',
