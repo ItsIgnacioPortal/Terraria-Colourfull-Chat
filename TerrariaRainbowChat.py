@@ -3,13 +3,13 @@ import pyperclip
 import sys
 from colour import Color
 import os
-from screeninfo import get_monitors
 from lolpython import lol_py
 
 from ahk import AHK
 if(AHK in sys.modules):
 	ahk = AHK()
 	ahkImported = True
+	from screeninfo import get_monitors
 else:
 	ahkImported = False
 #====================================================================================================================================
@@ -224,7 +224,9 @@ def main():
 	#Gradient or rainbow?
 	workingMode = selectWorkingMode()
 
-	monitorConf = getMonitorConf()
+	#If using the redistributable version, skip this, since we won't use the data anyway
+	if(ahkImported):
+		monitorConf = getMonitorConf()
 
 	print("Enter 'EXIT' to exit." + 
 		"\nEnter 'ChangeWorkingMode' to change mode." + 

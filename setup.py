@@ -2,6 +2,8 @@ from distutils.core import setup
 import py2exe
 import os
 
+nextVersion="1.0.3"
+
 def addCleanDataRecursively(dataDir, folderName):
 	allCleanData = str(addDataRecursively(dataDir, folderName))
 	
@@ -65,13 +67,13 @@ if(useAHK == "y"):
 			zipfile = None,
 			data_files = ahkTemplates,
 			name='Terraria Colourfull Chat',
-			version='1.0.2',
+			version=nextVersion,
 		)
 else:
 	setup(
 			console=['TerrariaRainbowChat.py'],
-			options = {'py2exe': {'bundle_files': 1, 'compressed': True, 'optimize': 2, 'excludes': 'AHK', "dll_excludes": ["libcrypto-1_1.dll"]}},
+			options = {'py2exe': {'bundle_files': 1, 'compressed': True, 'optimize': 2, 'excludes': ['AHK','screeninfo'], "dll_excludes": ["libcrypto-1_1.dll"]}},
 			zipfile = None,
 			name='Terraria Colourfull Chat',
-			version='1.0.2',
+			version=nextVersion,
 		)
