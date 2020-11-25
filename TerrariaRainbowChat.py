@@ -2,15 +2,15 @@ import random
 import pyperclip
 import sys
 from colour import Color
-from lolpython import lol_py
 
 from ahk import AHK
 if("ahk.autohotkey" in sys.modules):
 	ahk = AHK()
-	ahkImported = True
+	redistributable = True
 	from screeninfo import get_monitors
+	from lolpython import lol_py
 else:
-	ahkImported = False
+	redistributable = False
 #====================================================================================================================================
 #====================================================================================================================================
 #====================================================================================================================================
@@ -30,10 +30,10 @@ def selectWorkingMode():
 				"\n-------------------------")
 			workingMode = int(input("What mode do you want to run this script in?: "))
 			if(workingMode not in range(1,3)):
-				print("That's not a valid mode selection!")
+				print("Invalid selection!")
 
 		except:
-			print("That's not a valid mode selection!!")
+			print("Invalid selection!!")
 	
 	#When a working mode has been selected succesfully...
 	return int(workingMode)
@@ -57,12 +57,12 @@ def modifyGradientColor(activeGradientColor, targetGradientColor):
 			if(selectedGradientChange not in range(1,3)):
 				print("Invalid selection!")
 		except:
-			print("Invalid selection!")
+			print("Invalid selection!!")
 
 	try:
 		newValue = Color(input("Enter the NEW color: "))
 	except:
-		print("Invalid value inputted! Keeping old colour...")
+		print("Invalid input! Keeping old colour...")
 		return
 	
 	#If user wants to change the active gradient color...
@@ -128,7 +128,7 @@ def keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGra
 	pyperclip.copy(finalText)
 
 
-	if(ahkImported):
+	if(redistributable):
 		#Activate the terraria window
 		ahk.mouse_position = (monitorConf[0], monitorConf[1])
 		print("Moving mouse to terraria window..." + 
@@ -158,10 +158,10 @@ def getMonitorConf():
 			selectedMonitor = int(input("On wich monitor have you opened terraria?: "))
 
 			if(selectedMonitor not in range(1,len(monitors)+1)):
-				print("Invalid monitor selected!")
+				print("Invalid selection!")
 
 		except:
-			print("Invalid monitor selected!!")
+			print("Invalid selection!!")
 		
 
 
@@ -176,7 +176,7 @@ def getMonitorConf():
 		monitorPos = input("Where (in real life) is the selected monitor?: ")
 
 		if(monitorPos not in ["left", "center", "right"]):
-			print("Invalid position selected!")
+			print("Invalid selection!")
 
 	if(monitorPos=="left"):
 		#Return array with the center coordinates of the monitor on the left
@@ -218,13 +218,16 @@ def main():
 	"\n" + r"| |__| (_) | | (_) | |_| | |  |  _| |_| | | | | |___| | | | (_| | |_" + 
 	"\n" + r" \____\___/|_|\___/ \__,_|_|  |_|  \__,_|_|_|  \____|_| |_|\__,_|\__|" + 
 	"\n")
-	lol_py(banner)
+	if(redistributable):
+		print(banner)
+	else:
+		lol_py(banner)
 
 	#Gradient or rainbow?
 	workingMode = selectWorkingMode()
 
 	#If using the redistributable version, skip this, since we won't use the data anyway
-	if(ahkImported):
+	if(redistributable):
 		monitorConf = getMonitorConf()
 
 	print("Enter 'EXIT' to exit." + 
