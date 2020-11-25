@@ -1,16 +1,17 @@
 import random
 import pyperclip
-import sys
 from colour import Color
 
-from ahk import AHK
-if("ahk.autohotkey" in sys.modules):
-	ahk = AHK()
-	redistributable = True
+
+try:
+	from ahk import AHK
 	from screeninfo import get_monitors
 	from lolpython import lol_py
-else:
+	ahk = AHK()
 	redistributable = False
+except:
+	print("Failed to import one or more libraries. Asuming redistributable...")
+	redistributable = True
 #====================================================================================================================================
 #====================================================================================================================================
 #====================================================================================================================================
