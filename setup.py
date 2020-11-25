@@ -2,7 +2,7 @@ from distutils.core import setup
 import py2exe
 import os
 
-nextVersion="1.0.3"
+nextVersion="1.0.4"
 
 def addCleanDataRecursively(dataDir, folderName):
 	allCleanData = str(addDataRecursively(dataDir, folderName))

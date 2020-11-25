@@ -2,11 +2,10 @@ import random
 import pyperclip
 import sys
 from colour import Color
-import os
 from lolpython import lol_py
 
 from ahk import AHK
-if(AHK in sys.modules):
+if("ahk.autohotkey" in sys.modules):
 	ahk = AHK()
 	ahkImported = True
 	from screeninfo import get_monitors
@@ -266,9 +265,14 @@ def main():
 		#Therefor, it's this script's duty to ensure no strings over-the-limit are generated
 		#one character coverted to it's equivalent in hex color for terraria is * 12 it's original size.
 		#During testing, the maximum length of the strings terraria servers could take b4 kicking the player is of 992 characters. OR: 82 characters with colors + 7 unformatted characters.
-		elif(len(depuratedUserText) <= 82 and bannedCharactersCounter <= 7):
+		elif(len(depuratedUserText) <= 82):
 			keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGradientColor, bannedCharacters)
 
+		#There's more than 82 valid chars. If there's less than 7 bannedchars... 
+		elif(bannedCharactersCounter <= 7):
+			keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGradientColor, bannedCharacters)
+
+		#Both checks failed. Send error
 		else:
 			print("The string you entered is too long! No conversion will be made." + 
 				"\n The string you entered had " + str(len(depuratedUserText)) + " valid characters, and " + str(bannedCharactersCounter) + " banned characters." 
