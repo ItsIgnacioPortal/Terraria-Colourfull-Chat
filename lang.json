@@ -1,0 +1,58 @@
+{
+    "LANG_RedistributableCheck": {
+        "ENG": "[INFO]: Failed to import one or more libraries. Asuming redistributable...",
+        "ESP": "[INFO]: Fallo al importar una o mas librerias. Asumiendo redistribuible..."
+    },
+    "LANG_WorkingModeMenu": {
+        "ENG": "-------------------------\"+\"\n1 - Rainbow mode\" + \"\n2 - Gradient mode\" + \"\n-------------------------",
+        "ESP": "-------------------------\"+\"\n1 - Modo Arcoiris\" + \"\n2 - Modo Gradiente\" + \"\n-------------------------"
+    },
+    "LANG_WorkingModeQuery": {
+        "ENG": "What mode do you want to run this script in?: ",
+        "ESP": "En que modo quieres ejecutar este script?"
+    },
+    "LANG_InvalidSelection": {
+        "ENG": "Invalid selection!",
+        "ESP": "Seleccion invalida!"
+    },
+    "LANG_InvalidSelectionBad": {
+        "ENG": "Invalid selection!!",
+        "ESP": "Seleccion invalida!"
+    },
+    "LANG_Instructions": {
+        "ENG": "Enter 'EXIT' to exit.\" + \"\nEnter 'ChangeWorkingMode' to change mode.",
+        "ESP": "Ingresa 'EXIT' para salir\" + \"\nIngresa 'ChangeWorkingMode' para cambiar de modo."
+    },
+    "LANG_GradientInstructions": {
+        "ENG": "Enter 'ChangeGradientColor' to change the colors used in gradient mode.",
+        "ESP": "Ingresa 'ChangeGradientColor' para cambiar los colores utilizados en el modo gradiente."
+    },
+    "LANG_GradientMenu": {
+        "ENG": "\n1 - Active gradient color\" + \"\n2 - Target gradient color",
+        "ESP": "\n1 - Color de gradiente activo\" + \"\n2 - Color de gradiente objetivo"
+    },
+    "LANG_GradientQuery": {
+        "ENG": "Wich gradient color do you want to modify?: ",
+        "ESP": "Cual color de gradiente quieres modificar?: "
+    },
+    "LANG_NewGradientQuery": {
+        "ENG": "Input a new colour: ",
+        "ESP": "Ingresa un nuevo color: "
+    },
+    "LANG_NewGradientFail": {
+        "ENG": "Invalid input! Keeping old colour...\n",
+        "ESP": "Input invalida! Manteniendo color anterior...\n"
+    },
+    "LANG_GeneratedTextSuccess": {
+        "ENG": "\nGenerated text been copied to the clipboard!",
+        "ESP": "\nEl texto generado a sido copiado al portapapeles!"
+    },
+    "LANG_InitialInput": {
+        "ENG": "Enter your text: ",
+        "ESP": "Ingresa tu texto: "
+    },
+    "LANG_TextTooLongError": {
+        "ENG": "The string you entered is too long! No conversion will be made.\" + \"\n The string you entered had \" + str(len(depuratedUserText)) + \" valid characters, and \" + str(bannedCharactersCounter) + \" banned characters.\" + \"\n For more info on this limitation, refer to the README.md",
+        "ESP": "El texto que ingresaste es demasiado largo! La conversion no se realizará.\" + \"\n El texto que ingresaste tenía \" + str(len(depuratedUserText)) + \" caracteres validos, y \" + str(bannedCharactersCounter) + \" caracteres baneados.\" + \"\n Para mas informacion sobre esta limitacion, lee el README.md"
+    }
+}
