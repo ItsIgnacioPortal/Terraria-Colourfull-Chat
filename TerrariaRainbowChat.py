@@ -10,7 +10,7 @@ try:
 	ahk = AHK()
 	redistributable = False
 except:
-	print("[INFO]: Failed to import one or more libraries. Asuming redistributable...")
+	print("LANG_RedistributableCheck")
 	redistributable = True
 #====================================================================================================================================
 #====================================================================================================================================
@@ -25,21 +25,17 @@ def selectWorkingMode():
 	while(workingMode not in range(1,3)):
 
 		try:
-			print("-------------------------"+
-				"\n1 - Rainbow mode" + 
-				"\n2 - Gradient mode" + 
-				"\n-------------------------")
-			workingMode = int(input("What mode do you want to run this script in?: "))
+			print("LANG_WorkingModeMenu")
+			workingMode = int(input("LANG_WorkingModeQuery"))
 			if(workingMode not in range(1,3)):
-				print("Invalid selection!")
+				print("LANG_InvalidSelection")
 
 		except:
-			print("Invalid selection!!")
+			print("LANG_InvalidSelectionBad")
 	
 	#When a working mode has been selected succesfully...
-	print("Enter 'EXIT' to exit." + 
-		"\nEnter 'ChangeWorkingMode' to change mode.")
-	if(workingMode == 2): print("Enter 'ChangeGradientColor' to change the colors used in gradient mode.")
+	print("LANG_Instructions")
+	if(workingMode == 2): print("LANG_GradientInstructions")
 
 	return int(workingMode)
 
@@ -54,21 +50,20 @@ def modifyGradientColor(activeGradientColor, targetGradientColor):
 	#Let user pick wich color they want to change
 	while(selectedGradientChange not in range(1,3)):
 		print("-------------------------"+
-			"\n1 - Active gradient color" + 
-			"\n2 - Target gradient color" + 
+			"LANG_GradientMenu" + 
 			"\n-------------------------")
 		
 		try:
-			selectedGradientChange = int(input("Wich gradient color do you want to modify?: "))
+			selectedGradientChange = int(input("LANG_GradientQuery"))
 			if(selectedGradientChange not in range(1,3)):
-				print("Invalid selection!")
+				print("LANG_InvalidSelection")
 		except:
-			print("Invalid selection!!")
+			print("LANG_InvalidSelectionBad")
 
 	try:
-		newValue = Color(input("Enter the NEW color: "))
+		newValue = Color(input("LANG_NewGradientQuery"))
 	except:
-		print("Invalid input! Keeping old colour...\n")
+		print("LANG_NewGradientFail")
 		return [oldColors[0], oldColors[1]]
 	
 	#If user wants to change the active gradient color...
@@ -128,7 +123,7 @@ def keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGra
 
 
 	#Print generated text to the console
-	print(finalText + "\nGenerated text been copied to the clipboard!")
+	print(finalText + "LANG_GeneratedTextSuccess")
 
 	#Copy generated text to the clipboard
 	pyperclip.copy(finalText)
@@ -164,10 +159,10 @@ def getMonitorConf():
 			selectedMonitor = int(input("On wich monitor have you opened terraria?: "))
 
 			if(selectedMonitor not in range(1,len(monitors)+1)):
-				print("Invalid selection!")
+				print("LANG_InvalidSelection")
 
 		except:
-			print("Invalid selection!!")
+			print("LANG_InvalidSelectionBad")
 		
 
 
@@ -238,7 +233,7 @@ def main():
 
 	#Loop it until the user wants to exit
 	while(userText != "EXIT"):
-		userText = input("Enter your text: ")
+		userText = input("LANG_InitialInput")
 		
 		#Restart the contents of depuratedUserText
 		depuratedUserText = ""
@@ -279,7 +274,5 @@ def main():
 
 		#Both checks failed. Send error
 		else:
-			print("The string you entered is too long! No conversion will be made." + 
-				"\n The string you entered had " + str(len(depuratedUserText)) + " valid characters, and " + str(bannedCharactersCounter) + " banned characters." 
-				"\n For info in this limitation, refer to the README.md")
+			print("LANG_TextTooLongError")
 main()
