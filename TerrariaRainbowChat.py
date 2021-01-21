@@ -10,7 +10,7 @@ try:
 	ahk = AHK()
 	redistributable = False
 except:
-	print("Failed to import one or more libraries. Asuming redistributable...")
+	print("[INFO]: Failed to import one or more libraries. Asuming redistributable...")
 	redistributable = True
 #====================================================================================================================================
 #====================================================================================================================================
@@ -37,6 +37,10 @@ def selectWorkingMode():
 			print("Invalid selection!!")
 	
 	#When a working mode has been selected succesfully...
+	print("Enter 'EXIT' to exit." + 
+		"\nEnter 'ChangeWorkingMode' to change mode.")
+	if(workingMode == 2): print("Enter 'ChangeGradientColor' to change the colors used in gradient mode.")
+
 	return int(workingMode)
 
 
@@ -45,6 +49,7 @@ def selectWorkingMode():
 def modifyGradientColor(activeGradientColor, targetGradientColor):
 	newValue = ""
 	selectedGradientChange = 0
+	oldColors = [activeGradientColor, targetGradientColor]
 
 	#Let user pick wich color they want to change
 	while(selectedGradientChange not in range(1,3)):
@@ -63,8 +68,8 @@ def modifyGradientColor(activeGradientColor, targetGradientColor):
 	try:
 		newValue = Color(input("Enter the NEW color: "))
 	except:
-		print("Invalid input! Keeping old colour...")
-		return
+		print("Invalid input! Keeping old colour...\n")
+		return [oldColors[0], oldColors[1]]
 	
 	#If user wants to change the active gradient color...
 	if(selectedGradientChange == 1):
@@ -114,7 +119,7 @@ def keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGra
 			#Format it according to Terraria's chat format:
 			#https://terraria.gamepedia.com/Chat
 			if(userText[element] not in bannedCharacters):
-				finalText = (finalText + "[c/" + str(hex_number) + ":"+str(userText[element]) + "]")
+				finalText = (finalText + "[c/" + str(hex_number) + ":" +str(userText[element]) + "]")
 
 			else:
 				finalText = (finalText + userText[element])
@@ -129,7 +134,7 @@ def keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGra
 	pyperclip.copy(finalText)
 
 
-	if(redistributable):
+	if(not redistributable):
 		#Activate the terraria window
 		ahk.mouse_position = (monitorConf[0], monitorConf[1])
 		print("Moving mouse to terraria window..." + 
@@ -227,13 +232,9 @@ def main():
 	#Gradient or rainbow?
 	workingMode = selectWorkingMode()
 
-	#If using the redistributable version, skip this, since we won't use the data anyway
-	if(redistributable):
+	#If not .exe version, get monitors
+	if(not redistributable):
 		monitorConf = getMonitorConf()
-
-	print("Enter 'EXIT' to exit." + 
-		"\nEnter 'ChangeWorkingMode' to change mode." + 
-		"\nEnter 'ChangeGradientColor' to change the color used in gradient mode.")
 
 	#Loop it until the user wants to exit
 	while(userText != "EXIT"):
