@@ -54,5 +54,25 @@
 	"LANG_TextTooLongError": {
 		"ENG": "The string you entered is too long! No conversion will be made.\" + \"\\n The string you entered had \" + str(len(depuratedUserText)) + \" valid characters, and \" + str(bannedCharactersCounter) + \" banned characters.\" + \"\\n For more info on this limitation, refer to the README.md",
 		"ESP": "El texto que ingresaste es demasiado largo! La conversion no se realizará.\" + \"\\n El texto que ingresaste tenía \" + str(len(depuratedUserText)) + \" caracteres validos, y \" + str(bannedCharactersCounter) + \" caracteres baneados.\" + \"\\n Para mas informacion sobre esta limitacion, lee el README.md"
+	},
+	"LANG_CheckingForUpdates": {
+		"ENG": "Checking for updates...",
+		"ESP": "Buscando actualizaciones..."
+	},
+	"LANG_ConnectionError": {
+		"ENG": "There was an error getting to the update server. Check your internet connection.",
+		"ESP": "Hubo un error comunicandose con el servidor de actualizaciones. Verifica tu coneccion."
+	},
+	"LANG_NewVersionFound": {
+		"ENG": "New version found! Do you wish to update? (YES/no): ",
+		"ESP": "Nueva version disponible! Deseas actualizar? (SI/no): "
+	},
+	"LANG_NoUpdatesFound": {
+		"ENG": "You're already using the latest version.",
+		"ESP": "Ya estas usando la ultima version."
+	},
+	"LANG_Yes": {
+		"ENG": "yes",
+		"ESP": "si"
 	}
 }
