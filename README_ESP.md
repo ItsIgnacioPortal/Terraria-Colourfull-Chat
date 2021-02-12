@@ -7,8 +7,8 @@ Esto es un script echo en python 3.7 que ayuda a sus usuarios en la creacion de 
 
 # Instalación
 
-Dirigete a [pagina de versiones](https://github.com/PinkDev1/Terraria-Colourfull-Chat/releases) y descarga la ultima version.
-Una vez descargado, puedes abrirlo como cualquier otro _.exe_
+Dirigete a la [pagina de versiones](https://github.com/PinkDev1/Terraria-Colourfull-Chat/releases) y descarga la ultima version.
+Una vez descargada, ejecutalo como cualquier otro _.exe_
 
 O, si tienes **git** y **python3** instalado:
 ```
@@ -23,8 +23,9 @@ El uso es mayormente intuitivo si tiene la habilidad de leer :)
 
 Abri el **.exe** que descargaste
 
-O, si el codigo fuente:
+O, si estas usandolo desde el codigo fuente:
 `python3 TerrariaRainbowChat.py`
+
 
 1. Elige el "modo de operacion"
 2. SOURCE - Select the monitor on wich terraria is open (if you have only one monitor, answer anything, it won't break anything.)
