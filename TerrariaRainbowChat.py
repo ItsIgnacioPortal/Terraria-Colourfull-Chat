@@ -1,7 +1,14 @@
+#Required for core functionality
 import random
 import pyperclip
 from colour import Color
 
+#Required for checking for updates
+import requests
+import json
+from packaging import version
+import os
+from urllib3.exceptions import InsecureRequestWarning
 
 try:
 	from ahk import AHK
@@ -12,6 +19,9 @@ try:
 except:
 	print("LANG_RedistributableCheck")
 	redistributable = True
+
+
+__version__ = "AUTO-REPLACED-VERSION"
 #====================================================================================================================================
 #====================================================================================================================================
 #====================================================================================================================================
@@ -205,6 +215,7 @@ def main():
 	bannedCharacters = [" ", "/", "[", "]", ":"]
 	depuratedUserText = ""
 	bannedCharactersCounter = 0
+	updateCheck = ""
 
 	#Banner
 	banner=(r" _____                        _" + 
@@ -223,6 +234,46 @@ def main():
 		print(banner)
 	else:
 		lol_py(banner)
+
+
+	#Check for updates
+	#Disable plain HTTP warning. We're only getting a version number. Who cares?
+	#https://stackoverflow.com/questions/15445981/how-do-i-disable-the-security-certificate-check-in-python-requests
+	requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
+	
+
+	print("LANG_CheckingForUpdates")
+	
+	###
+	
+	updateCheck = requests.get('http://api.github.com/repos/PinkDev1/Terraria-Colourfull-Chat/releases/latest', verify=False)
+	
+	###
+
+	#If something happened, spit an error.
+	if (updateCheck.status_code != 200):
+		print("LANG_ConnectionError")
+
+	else:
+		#Get latest version from the GitHub REST API, parse response as JSON, get the tag_name (version), and remove the "v"
+		#https://docs.github.com/en/rest/reference/repos#get-the-latest-release
+		versionNumber = ((json.loads(updateCheck.text))["tag_name"])[1:]
+		
+		#Compare as version numbers
+		#https://stackoverflow.com/questions/11887762/how-do-i-compare-version-numbers-in-python
+		if(version.parse(versionNumber) > version.parse(__version__)):
+
+			#Update found! Do you want to update?
+			if(input("LANG_NewVersionFound").lower() == "LANG_Yes"):
+				#Open link in browser
+				#adf.ly shortened version of https://github.com/PinkDev1/Terraria-Colourfull-Chat/releases/latest
+				#Development takes time and money ¯\_(ツ)_/¯
+				os.system('cmd /c "start http://motriael.com/24801569/terrariacolourfullchatupdate"')
+		
+		else:
+			#No update avalible. Currently using the latest version!
+			print("LANG_NoUpdatesFound")
+
 
 	#Gradient or rainbow?
 	workingMode = selectWorkingMode()
