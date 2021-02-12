@@ -5,7 +5,7 @@ import shutil
 import json
 import fileinput
 
-nextVersion="3.2.0"
+nextVersion="3.1.0"
 
 def addCleanDataRecursively(dataDir, folderName):
 	allCleanData = str(addDataRecursively(dataDir, folderName))
@@ -91,7 +91,7 @@ with open('TEMP_TerrariaRainbowChat.py', 'r') as file:
 
 
 
-useAHK = (input("Do you want to build this with AHK included? (y/n): ")).upper()
+useAHK = (input("Do you want to build this with AHK included? (Y/N): ")).upper()
 if useAHK != "Y" and useAHK != "N":
 	print("Invalid option selected. Defaulting to \"no\"")
 	useAHK = "N"
