@@ -13,7 +13,7 @@
 	},
 	"LANG_InvalidSelectionBad": {
 		"ENG": "Invalid selection!!",
-		"ESP": "Seleccion invalida!"
+		"ESP": "Seleccion invalida!!"
 	},
 	"LANG_InvalidSelection": {
 		"ENG": "Invalid selection!",
@@ -61,7 +61,7 @@
 	},
 	"LANG_ConnectionError": {
 		"ENG": "There was an error getting to the update server. Check your internet connection.",
-		"ESP": "Hubo un error comunicandose con el servidor de actualizaciones. Verifica tu coneccion."
+		"ESP": "Hubo un error comunicandose con el servidor de actualizaciones."
 	},
 	"LANG_NewVersionFound": {
 		"ENG": "New version found! Do you wish to update? (YES/no): ",

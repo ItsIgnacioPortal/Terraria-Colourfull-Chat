@@ -68,7 +68,7 @@ if targetLanguage != "ESP" and targetLanguage != "ENG":
 	print("Invalid language entered. Assuming English...")
 	targetLanguage = "ENG"
 
-print("\nReplacing LangStrings in source code...\n")
+print("Replacing LangStrings in source code...\n")
 #https://stackoverflow.com/questions/17140886/how-to-search-and-replace-text-in-a-file
 #Open and read source code file as read only
 with open('TEMP_TerrariaRainbowChat.py', 'r') as file:
@@ -79,7 +79,7 @@ with open('TEMP_TerrariaRainbowChat.py', 'r') as file:
 	for LANGKey in range(0,len(list(lang.keys()))):
 		#https://stackoverflow.com/questions/3097866/access-an-arbitrary-element-in-a-dictionary-in-python#comment28476565_17085251
 		#https://stackoverflow.com/questions/17140886/how-to-search-and-replace-text-in-a-file
-		sourceCode = sourceCode.replace(str(list(lang.keys())[LANGKey]), str(lang[str(list(lang.keys())[LANGKey])][targetLanguage]) )
+		sourceCode = sourceCode.replace( str(list(lang.keys())[LANGKey]), str(lang[str(list(lang.keys())[LANGKey])][targetLanguage]) )
 
 	#Replace version number
 	sourceCode = sourceCode.replace("AUTO-REPLACED-VERSION", nextVersion)
@@ -121,6 +121,6 @@ else:
 		)
 
 #Cleanup
-#os.remove('TEMP_TerrariaRainbowChat.py')
+os.remove('TEMP_TerrariaRainbowChat.py')
 os.remove(r'dist/TerrariaRainbowChat.exe')
 os.rename(r'dist/TEMP_TerrariaRainbowChat.exe',r'dist/TerrariaRainbowChat.exe')
