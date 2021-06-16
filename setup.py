@@ -5,8 +5,9 @@ import shutil
 import json
 import fileinput
 import glob
+import re
 
-version = "4.0.0"
+version = "4.1.0"
 languages = {
 	"ENG": "ENGLISH",
 	"ESP" : "ESPAÑOL"
@@ -96,6 +97,11 @@ with open('TEMP_TerrariaRainbowChat.py', 'r') as file:
 
 	#Replace version number
 	sourceCode = sourceCode.replace("AUTO-REPLACED-VERSION", version)
+
+	#https://stackoverflow.com/questions/8784396/how-to-delete-the-words-between-two-delimiters#8784436
+	print("Optimizing code for redistributable...")
+	sourceCode = re.sub('(#OptStart)[^>]+(#OptEnd)', '',sourceCode)
+
 
 	#Write changes to the file
 	with open('TEMP_TerrariaRainbowChat.py', 'w') as file:

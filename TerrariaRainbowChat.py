@@ -138,14 +138,15 @@ def keepMovin(workingMode, userText, monitorConf, activeGradientColor, targetGra
 	#Copy generated text to the clipboard
 	pyperclip.copy(finalText)
 
-
+	#OptStart
 	if(not redistributable):
 		#Activate the terraria window
 		ahk.mouse_position = (monitorConf[0], monitorConf[1])
 		print("Moving mouse to terraria window..." + 
 			"\n[INFO]: Moved mouse to (" + str(monitorConf[0]) + " ;" + str(monitorConf[1]) + ")")
+	#OptEnd
 
-
+#OptStart
 #Function to get the user's monitor configuration. "On wich monitor is terraria?"
 #Returns an array of length=2 that contains the center coordinates of the selected monitor [width, height]
 def getMonitorConf():
@@ -201,6 +202,7 @@ def getMonitorConf():
 	else:
 		#Return array with the center coordinates of the monitor on the right
 		return [((monitors[selectedMonitor-1].width / 2) + monitors[selectedMonitor-1].width),(monitors[selectedMonitor-1].height / 2 )]
+#OptEnd
 
 #====================================================================================================================================
 #====================================================================================================================================
@@ -235,20 +237,13 @@ def main():
 	else:
 		lol_py(banner)
 
+	print("LANG_CheckingForUpdates")
 
 	#Check for updates
 	#Disable plain HTTP warning. We're only getting a version number. Who cares?
 	#https://stackoverflow.com/questions/15445981/how-do-i-disable-the-security-certificate-check-in-python-requests
 	requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
-	
-
-	print("LANG_CheckingForUpdates")
-	
-	###
-	
 	updateCheck = requests.get('http://api.github.com/repos/PinkDev1/Terraria-Colourfull-Chat/releases/latest', verify=False)
-	
-	###
 
 	#If something happened, spit an error.
 	if (updateCheck.status_code != 200):
@@ -278,9 +273,11 @@ def main():
 	#Gradient or rainbow?
 	workingMode = selectWorkingMode()
 
+	#OptStart
 	#If not .exe version, get monitors
 	if(not redistributable):
 		monitorConf = getMonitorConf()
+	#OptEnd
 
 	#Loop it until the user wants to exit
 	while(userText != "EXIT"):
