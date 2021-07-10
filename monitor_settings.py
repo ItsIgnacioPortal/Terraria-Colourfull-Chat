@@ -1,0 +1,2 @@
+widthOfMainMonitor=0
+heightOfMainMonitor=0
