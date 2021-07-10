@@ -58,3 +58,8 @@ To compile this yourself, just do:
 
 The command above uses python 3.7, but any python >= 3.7 should work.
 If you want to compile it with the AHK implementation, brace yourself.
+
+
+# Feedback
+
+If you have any questions/issues/requests etc, feel free to open an issue.
