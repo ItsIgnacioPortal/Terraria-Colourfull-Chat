@@ -5,11 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: setup.py",
+            "name": "Python: Current File",
             "type": "python",
             "request": "launch",
-            "program": "setup.py",
-            "args": ["py2exe"],
+            "program": "${file}",
             "console": "integratedTerminal"
         }
     ]
