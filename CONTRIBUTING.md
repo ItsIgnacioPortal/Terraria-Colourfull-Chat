@@ -7,6 +7,7 @@ Do not add any dependencies that substantially (x2) increase the size of the end
 When you're able to build successfully both the ESP and ENG versions, open a pull-request.
 
 Appart from the following error [(why?)](https://github.com/PyCQA/pylint/issues/4584), pylint should return clean without warnings:
+
 ``E1101: Module 'requests.packages' has no 'urllib3' member (no-member)``
 
 ## Pull Request Process
