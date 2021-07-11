@@ -1,8 +1,7 @@
 import unittest
 from unittest import mock
-from TerrariaRainbowChat import selectWorkingMode
-from TerrariaRainbowChat import modifyGradientColor
-from TerrariaRainbowChat import getMonitorConf
+
+import translator
 
 #for color tests
 from colour import Color
@@ -10,6 +9,12 @@ from colour import Color
 #for monitor selector tests
 from screeninfo import get_monitors
 from monitor_settings import *
+
+path = translator.translateSourceCode("ENG", False)
+
+from TerrariaRainbowChat import selectWorkingMode
+from TerrariaRainbowChat import modifyGradientColor
+from TerrariaRainbowChat import getMonitorConf
 
 class TestMain(unittest.TestCase):
 	#https://stackoverflow.com/questions/47690020/python-3-unit-tests-with-user-input
