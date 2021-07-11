@@ -3,3 +3,6 @@ ahk
 colour
 lolpython
 screeninfo
+requests
+packaging
+urllib3
