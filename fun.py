@@ -1,9 +1,9 @@
 from colour import Color
-try:
-	from screeninfo import get_monitors
-	redistributable = False
-except:
-	redistributable = True
+
+#OptStart
+#Not needed on redistributable version
+from screeninfo import get_monitors
+#OptEnd
 
 #Function let the user select the working mode
 #Returns an int that can be either 1 or 2. 1=Rainbow mode; 2=Gradient mode
