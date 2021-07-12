@@ -18,8 +18,12 @@ def selectWorkingMode():
 			if(workingMode not in range(1,3)):
 				print("LANG_InvalidSelection")
 
-		except:
+		except ValueError:
 			print("LANG_InvalidSelectionBad")
+
+		except KeyboardInterrupt:
+			exit()
+			
 	
 	#When a working mode has been selected succesfully...
 	print("LANG_Instructions")
