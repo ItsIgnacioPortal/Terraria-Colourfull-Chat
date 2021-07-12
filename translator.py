@@ -21,8 +21,8 @@ languages = {
 def translateSourceCode(targetSourceCodePath, targetLanguage, makeCopyOfSourceCode):
 	if(makeCopyOfSourceCode):
 		#Make a copy of the original source code
-		shutil.copyfile(targetSourceCodePath, "dist/TEMP_" + targetSourceCodePath)
-		targetSourceCodePath = "dist/TEMP_" + targetSourceCodePath
+		shutil.copyfile(targetSourceCodePath, "dist\\TEMP_" + targetSourceCodePath)
+		targetSourceCodePath = "dist\\TEMP_" + targetSourceCodePath
 
 	#Load and parse the contents of the lang.json
 	#NOTE: Due to parsing, the line jumps (\n) MUST be scaped, otherwise they'll be interpreted while replacing the strings below.
