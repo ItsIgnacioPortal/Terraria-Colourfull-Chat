@@ -167,9 +167,12 @@ if(useAHK == "Y"):
 			version = version
 		)
 else:
+	#"includes": ["ssl", "_socket", "_ssl", "socket", "selectors", "select", "base64", "binascii", "_hashlib", "urllib3.util.ssltransport", "requests.packages.urllib3.util.ssltransport"]
+	#ImportError: No module named 'requests.packages.urllib3'; requests.packages is not a package 🤔
+	#Probably the cause of the inconsistent builds
 	setup(
 			console = [mainSourceCodePath],
-			options = {"py2exe": {"bundle_files": 1, "compressed": True, "optimize": 2, "excludes": ["AHK","screeninfo", "lolpython", "ahk", "get_monitors", "lol_py", "fun"], "dll_excludes": ["libcrypto-1_1.dll"], "includes": [["ssl", "_socket", "_ssl", "socket", "selectors", "select", "base64", "binascii", "_hashlib", "urllib3.util.ssltransport", "requests.packages.urllib3.util.ssltransport"]]}},
+			options = {"py2exe": {"bundle_files": 1, "compressed": True, "optimize": 2, "excludes": ["AHK","screeninfo", "lolpython", "ahk", "get_monitors", "lol_py", "fun"], "dll_excludes": ["libcrypto-1_1.dll"], "includes": [funCodePath[5:][:-3]]}},
 			zipfile = None,
 			name = "Terraria Colourfull Chat",
 			version = version
