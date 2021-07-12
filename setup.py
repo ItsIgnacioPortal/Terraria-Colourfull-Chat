@@ -64,8 +64,8 @@ def addDataRecursively(dataDir, folderName):
 #Optimize source code and replace version number
 def sourceCodeParser(sourceCodePath, replaceVersion, version):
 	#Make a copy of the original source code
-	shutil.copyfile(sourceCodePath, "dist/" + sourceCodePath[:-3] + "_optimized" + sourceCodePath[-3:])
-	sourceCodePath = "dist/" + sourceCodePath[:-3] + "_optimized" + sourceCodePath[-3:]
+	shutil.copyfile(sourceCodePath, "dist\\" + sourceCodePath[:-3] + "_optimized" + sourceCodePath[-3:])
+	sourceCodePath = "dist\\" + sourceCodePath[:-3] + "_optimized" + sourceCodePath[-3:]
 
 	#Open and read source code file as read only
 	#file will be closed automatically by the 'with'.
@@ -107,6 +107,14 @@ mainSourceCodePath = translator.translateSourceCode(mainSourceCodePath, targetLa
 #Translate functions source code
 funCodePath = translator.translateSourceCode(funCodePath, targetLanguage, False)
 
+
+#Remove previous compilated files
+#https://stackoverflow.com/a/1039747/11490425
+os.chdir("dist")
+for file in glob.glob("*.exe"):
+	os.remove(file)
+os.chdir("..")
+
 useAHK = (input("Do you want to build this with AHK included? (Y/N): ")).upper()
 if useAHK != "Y" and useAHK != "N":
 	print("Invalid option selected. Defaulting to \"no\"")
@@ -134,16 +142,6 @@ else:
 			name = 'Terraria Colourfull Chat',
 			version = version
 		)
-
-#Cleanup
-os.remove(mainSourceCodePath)
-
-#Remove previous compilated files
-#https://stackoverflow.com/a/1039747/11490425
-os.chdir("dist")
-for file in glob.glob("*.exe"):
-	os.remove(file)
-os.chdir("..")
 
 #Give the compiled file a meaningfull name
 os.rename(mainSourceCodePath[:-3] + ".exe", mainSourceCodePath[:-3] + "_" + version + ".exe")
