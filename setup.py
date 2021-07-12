@@ -137,7 +137,7 @@ if(useAHK == "Y"):
 else:
 	setup(
 			console = [mainSourceCodePath],
-			options = {'py2exe': {'bundle_files': 1, 'compressed': True, 'optimize': 2, 'excludes': ['AHK','screeninfo', 'lolpython', 'ahk', 'get_monitors', 'lol_py'], "dll_excludes": ["libcrypto-1_1.dll"]}},
+			options = {"py2exe": {"bundle_files": 1, "compressed": True, "optimize": 2, "excludes": ["AHK","screeninfo", "lolpython", "ahk", "get_monitors", "lol_py", "fun"], "dll_excludes": ["libcrypto-1_1.dll"], "includes": [["ssl", "_socket", "_ssl", "socket", "selectors", "select", "base64", "binascii", "_hashlib", "urllib3.util.ssltransport", "requests.packages.urllib3.util.ssltransport"]]}},
 			zipfile = None,
 			name = "Terraria Colourfull Chat",
 			version = version
