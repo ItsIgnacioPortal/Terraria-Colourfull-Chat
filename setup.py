@@ -5,6 +5,12 @@ import shutil
 import glob
 import re
 
+#To do custom imports
+#https://stackoverflow.com/a/4383597/11490425
+import sys
+sys.path.insert(1, (os.getcwd() + "\\dist"))
+print(sys.path)
+
 import translator
 from translator import languages
 version = "4.1.0"
@@ -87,6 +93,22 @@ def sourceCodeParser(sourceCodePath, replaceVersion, version):
 
 	return sourceCodePath
 
+#After all of the code gets optimized, "fun.py" has changed name, but not it"s relative location. This function will patch that:
+#WARNING: Modifies original file
+def replaceInFile(targetFilePath, textToReplace, replaceWith):
+
+	#Open and read source code file as read only
+	#file will be closed automatically by the "with".
+	with open(targetFilePath, "r") as file:
+		targetFileContents = file.read()
+
+		targetFileContents = targetFileContents.replace(textToReplace, replaceWith)
+
+		#Write changes to the file
+		#file will be closed automatically by the "with".
+		with open(targetFilePath, "w") as file:
+			file.write(targetFileContents)
+
 #=====================================================================================
 #=====================================================================================
 #=====================================================================================
@@ -109,6 +131,12 @@ mainSourceCodePath = translator.translateSourceCode(mainSourceCodePath, targetLa
 #Translate functions source code
 funCodePath = translator.translateSourceCode(funCodePath, targetLanguage, False)
 
+
+#Replaces in original files
+#funCodePath is relative to the base of the project
+#"[5:]" removes the "dist\"
+#"[:-3]" removes the ".py"
+replaceInFile(mainSourceCodePath, "fun.", funCodePath[5:][:-3] + ".")
 
 #Remove previous compilated files
 #https://stackoverflow.com/a/1039747/11490425
