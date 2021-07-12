@@ -35,7 +35,7 @@ def translateSourceCode(targetSourceCodePath, targetLanguage, makeCopyOfSourceCo
 			print("Invalid language entered. Assuming English...")
 			targetLanguage = "ENG"
 
-	print("Replacing LangStrings in source code...\n")
+	print("Replacing LangStrings in source code...")
 	#https://stackoverflow.com/questions/17140886/how-to-search-and-replace-text-in-a-file
 	#Open and read source code file as read only
 	with open(targetSourceCodePath, 'r') as file:
