@@ -10,7 +10,9 @@ from packaging import version
 import os
 from urllib3.exceptions import InsecureRequestWarning
 
+#OptStart
 import fun
+#OptEnd
 
 try:
 	from ahk import AHK
