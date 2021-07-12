@@ -92,7 +92,7 @@ def sourceCodeParser(sourceCodePath, replaceVersion, version):
 #=====================================================================================
 
 #English or Spanish?
-targetLanguage = (input("Wich language do you want to compile this for? (ENG/ESP): ")).upper()
+targetLanguage = (input("Wich language do you want to compile this for? [ENG/esp]: ")).upper()
 if targetLanguage != "ESP" and targetLanguage != "ENG":
 	print("Invalid language entered. Assuming English...")
 	targetLanguage = "ENG"
@@ -115,7 +115,7 @@ for file in glob.glob("*.exe"):
 	os.remove(file)
 os.chdir("..")
 
-useAHK = (input("Do you want to build this with AHK included? (Y/N): ")).upper()
+useAHK = (input("Do you want to build this with AHK included? [Y/n]: ")).upper()
 if useAHK != "Y" and useAHK != "N":
 	print("Invalid option selected. Defaulting to \"no\"")
 	useAHK = "N"
