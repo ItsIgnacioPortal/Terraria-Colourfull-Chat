@@ -2,16 +2,12 @@ from distutils.core import setup
 import py2exe
 import os
 import shutil
-import json
-import fileinput
 import glob
 import re
 
+import translator
+from translator import languages
 version = "4.1.0"
-languages = {
-	"ENG": "ENGLISH",
-	"ESP" : "ESPAÑOL"
-}
 
 #=====================================================================================
 #=====================================================================================
@@ -65,16 +61,35 @@ def addDataRecursively(dataDir, folderName):
 	print("\nReturning: " + str(allData) + "\n\n\n\n")
 	return allData
 
-#=====================================================================================
-#=====================================================================================
-#=====================================================================================
+#Optimize source code and replace version number
+def sourceCodeParser(sourceCodePath, replaceVersion, version):
+	#Make a copy of the original source code
+	shutil.copyfile(sourceCodePath, "dist/" + sourceCodePath[:-3] + "_optimized" + sourceCodePath[-3:])
+	sourceCodePath = "dist/" + sourceCodePath[:-3] + "_optimized" + sourceCodePath[-3:]
 
-#Make a copy of the original source code
-shutil.copyfile('TerrariaRainbowChat.py', 'TEMP_TerrariaRainbowChat.py')
+	#Open and read source code file as read only
+	#file will be closed automatically by the 'with'.
+	with open(sourceCodePath, 'r') as file:
+		sourceCode = file.read()
+		
+		if(replaceVersion):
+			#Replace version number
+			sourceCode = sourceCode.replace("AUTO-REPLACED-VERSION", version)
 
-#Load and parse the contents of the lang.json
-#NOTE: Due to parsing, the line jumps (\n) MUST be scaped, otherwise they'll be interpreted while replacing the strings below.
-lang = json.load(open('lang.json', 'r'))
+		#https://stackoverflow.com/questions/8784396/how-to-delete-the-words-between-two-delimiters#8784436
+		print("Optimizing code for redistributable...")
+		sourceCode = re.sub('(#OptStart)[^>]+(#OptEnd)', '',sourceCode)
+
+		#Write changes to the file
+		#file will be closed automatically by the 'with'.
+		with open(sourceCodePath, 'w') as file:
+			file.write(sourceCode)
+
+	return sourceCodePath
+
+#=====================================================================================
+#=====================================================================================
+#=====================================================================================
 
 #English or Spanish?
 targetLanguage = (input("Wich language do you want to compile this for? (ENG/ESP): ")).upper()
@@ -82,40 +97,20 @@ if targetLanguage != "ESP" and targetLanguage != "ENG":
 	print("Invalid language entered. Assuming English...")
 	targetLanguage = "ENG"
 
-print("Replacing LangStrings in source code...\n")
-#https://stackoverflow.com/questions/17140886/how-to-search-and-replace-text-in-a-file
-#Open and read source code file as read only
-with open('TEMP_TerrariaRainbowChat.py', 'r') as file:
-	sourceCode = file.read()
-	#file is closed automatically by the 'with'.
-	
-	#Replace strings in-memory
-	for LANGKey in range(0,len(list(lang.keys()))):
-		#https://stackoverflow.com/questions/3097866/access-an-arbitrary-element-in-a-dictionary-in-python#comment28476565_17085251
-		#https://stackoverflow.com/questions/17140886/how-to-search-and-replace-text-in-a-file
-		sourceCode = sourceCode.replace( str(list(lang.keys())[LANGKey]), str(lang[str(list(lang.keys())[LANGKey])][targetLanguage]) )
+#Optimize source code
+mainSourceCodePath = sourceCodeParser("TerrariaRainbowChat.py", True, version)
+#Optimize functions code
+funCodePath = sourceCodeParser("fun.py", False, "")
 
-	#Replace version number
-	sourceCode = sourceCode.replace("AUTO-REPLACED-VERSION", version)
-
-	#https://stackoverflow.com/questions/8784396/how-to-delete-the-words-between-two-delimiters#8784436
-	print("Optimizing code for redistributable...")
-	sourceCode = re.sub('(#OptStart)[^>]+(#OptEnd)', '',sourceCode)
-
-
-	#Write changes to the file
-	with open('TEMP_TerrariaRainbowChat.py', 'w') as file:
-		file.write(sourceCode)
-		#file is closed automatically by the 'with'.
-
-
+#Translate source code
+mainSourceCodePath = translator.translateSourceCode(mainSourceCodePath, targetLanguage, False)
+#Translate functions source code
+funCodePath = translator.translateSourceCode(funCodePath, targetLanguage, False)
 
 useAHK = (input("Do you want to build this with AHK included? (Y/N): ")).upper()
 if useAHK != "Y" and useAHK != "N":
 	print("Invalid option selected. Defaulting to \"no\"")
 	useAHK = "N"
-
-
 
 if(useAHK == "Y"):
 	ahkTemplatesDir = str(input("Enter the location of the templates folder in the AHK library (full path): "))
@@ -124,7 +119,7 @@ if(useAHK == "Y"):
 
 	print("Good luck.")
 	setup(
-			console = ['TEMP_TerrariaRainbowChat.py'],
+			console = [mainSourceCodePath],
 			options = {'py2exe': {'bundle_files': 1, 'compressed': True, 'optimize': 2,"dll_excludes": ["libcrypto-1_1.dll", "libssl-1_1.dll"]}},
 			zipfile = None,
 			data_files = ahkTemplates,
@@ -133,7 +128,7 @@ if(useAHK == "Y"):
 		)
 else:
 	setup(
-			console = ['TEMP_TerrariaRainbowChat.py'],
+			console = [mainSourceCodePath],
 			options = {'py2exe': {'bundle_files': 1, 'compressed': True, 'optimize': 2, 'excludes': ['AHK','screeninfo', 'lolpython', 'ahk', 'get_monitors', 'lol_py'], "dll_excludes": ["libcrypto-1_1.dll"]}},
 			zipfile = None,
 			name = 'Terraria Colourfull Chat',
@@ -141,11 +136,14 @@ else:
 		)
 
 #Cleanup
-os.remove('TEMP_TerrariaRainbowChat.py')
+os.remove(mainSourceCodePath)
 
+#Remove previous compilated files
 #https://stackoverflow.com/a/1039747/11490425
-for file in glob.glob("dist/TerrariaRainbowChat_" + languages[targetLanguage] + "*"):
+os.chdir("dist")
+for file in glob.glob("*.exe"):
 	os.remove(file)
+os.chdir("..")
 
 #Give the compiled file a meaningfull name
-os.rename(r'dist/TEMP_TerrariaRainbowChat.exe',"dist/TerrariaRainbowChat_" + languages[targetLanguage] + "_" + version + ".exe")
+os.rename(mainSourceCodePath[:-3] + ".exe", mainSourceCodePath[:-3] + "_" + version + ".exe")
