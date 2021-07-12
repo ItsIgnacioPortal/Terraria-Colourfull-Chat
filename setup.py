@@ -78,7 +78,7 @@ def sourceCodeParser(sourceCodePath, replaceVersion, version):
 
 		#https://stackoverflow.com/questions/8784396/how-to-delete-the-words-between-two-delimiters#8784436
 		print("Optimizing code for redistributable...")
-		sourceCode = re.sub('(#OptStart)[^>]+(#OptEnd)', '',sourceCode)
+		sourceCode = re.sub('(#OptStart)[^>]+?(#OptEnd)', '',sourceCode)
 
 		#Write changes to the file
 		#file will be closed automatically by the 'with'.
