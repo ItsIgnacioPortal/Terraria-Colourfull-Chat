@@ -17,10 +17,10 @@ def addCleanDataRecursively(dataDir, folderName):
 	allCleanData = str(addDataRecursively(dataDir, folderName))
 	
 	#Purge all double quote (") characters
-	allCleanData = allCleanData.replace('\"', '')
+	allCleanData = allCleanData.replace("\"", "")
 
 	#Replace cuadruple \\\\ artifacts with \\
-	allCleanData = allCleanData.replace('\\\\','\\')
+	allCleanData = allCleanData.replace("\\\\","\\")
 
 	#Remove "[" at the start, and "]" at the end.
 	#These characters were added for some reason
@@ -43,7 +43,7 @@ def addDataRecursively(dataDir, folderName):
 			#https://stackoverflow.com/questions/33141595/how-can-i-remove-everything-in-a-string-until-a-characters-are-seen-in-python
 			#https://www.geeksforgeeks.org/python-find-last-occurrence-of-substring/
 			#hmm spaguetty
-			nestedFolderName = (f1[(f1.rindex('\\')):])[1:]
+			nestedFolderName = (f1[(f1.rindex("\\")):])[1:]
 
 			#Get data recursively, replicating the file structure
 			recursiveData = str(addDataRecursively(f1, (folderName + "\\" + nestedFolderName)))
@@ -68,8 +68,8 @@ def sourceCodeParser(sourceCodePath, replaceVersion, version):
 	sourceCodePath = "dist\\" + sourceCodePath[:-3] + "_optimized" + sourceCodePath[-3:]
 
 	#Open and read source code file as read only
-	#file will be closed automatically by the 'with'.
-	with open(sourceCodePath, 'r') as file:
+	#file will be closed automatically by the "with".
+	with open(sourceCodePath, "r") as file:
 		sourceCode = file.read()
 		
 		if(replaceVersion):
@@ -78,11 +78,11 @@ def sourceCodeParser(sourceCodePath, replaceVersion, version):
 
 		#https://stackoverflow.com/questions/8784396/how-to-delete-the-words-between-two-delimiters#8784436
 		print("Optimizing code for redistributable...")
-		sourceCode = re.sub('(#OptStart)[^>]+?(#OptEnd)', '',sourceCode)
+		sourceCode = re.sub("(#OptStart)[^>]+?(#OptEnd)", "",sourceCode)
 
 		#Write changes to the file
-		#file will be closed automatically by the 'with'.
-		with open(sourceCodePath, 'w') as file:
+		#file will be closed automatically by the "with".
+		with open(sourceCodePath, "w") as file:
 			file.write(sourceCode)
 
 	return sourceCodePath
@@ -128,10 +128,10 @@ if(useAHK == "Y"):
 	print("Good luck.")
 	setup(
 			console = [mainSourceCodePath],
-			options = {'py2exe': {'bundle_files': 1, 'compressed': True, 'optimize': 2,"dll_excludes": ["libcrypto-1_1.dll", "libssl-1_1.dll"]}},
+			options = {"py2exe": {"bundle_files": 1, "compressed": True, "optimize": 2,"dll_excludes": ["libcrypto-1_1.dll", "libssl-1_1.dll"]}},
 			zipfile = None,
 			data_files = ahkTemplates,
-			name ='Terraria Colourfull Chat',
+			name ="Terraria Colourfull Chat",
 			version = version
 		)
 else:
@@ -139,7 +139,7 @@ else:
 			console = [mainSourceCodePath],
 			options = {'py2exe': {'bundle_files': 1, 'compressed': True, 'optimize': 2, 'excludes': ['AHK','screeninfo', 'lolpython', 'ahk', 'get_monitors', 'lol_py'], "dll_excludes": ["libcrypto-1_1.dll"]}},
 			zipfile = None,
-			name = 'Terraria Colourfull Chat',
+			name = "Terraria Colourfull Chat",
 			version = version
 		)
 
