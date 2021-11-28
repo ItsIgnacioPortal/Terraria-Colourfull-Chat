@@ -56,6 +56,7 @@ To view it, just copy it, open the terraria chat and press `CTRL + V` (paste) :)
 To compile this yourself, just do:
 `py -3.7 setup.py py2exe`
 
+Last confirmed stable py2exe version: '0.11.0.1'
 The command above uses python 3.7, but any python >= 3.7 should work.
 If you want to compile it with the AHK implementation, brace yourself.
 
