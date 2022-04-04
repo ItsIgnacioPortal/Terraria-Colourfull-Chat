@@ -243,7 +243,7 @@ def main():
 	#Disable plain HTTP warning. We're only getting a version number. Who cares?
 	#https://stackoverflow.com/questions/15445981/how-do-i-disable-the-security-certificate-check-in-python-requests
 	requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
-	updateCheck = requests.get('http://api.github.com/repos/PinkDev1/Terraria-Colourfull-Chat/releases/latest', verify=False)
+	updateCheck = requests.get('http://api.github.com/repos/ItsIgnacioPortal/Terraria-Colourfull-Chat/releases/latest', verify=False)
 
 	#If something happened, spit an error.
 	if (updateCheck.status_code != 200):
