@@ -7,7 +7,7 @@ Esto es un script echo en python 3.7 que ayuda a sus usuarios en la creacion de 
 
 # Instalación
 
-Dirigete a la [pagina de versiones](https://github.com/PinkDev1/Terraria-Colourfull-Chat/releases) y descarga la ultima version.
+Dirigete a la [pagina de versiones](https://github.com/ItsIgnacioPortal/Terraria-Colourfull-Chat/releases) y descarga la ultima version.
 Una vez descargada, ejecutalo como cualquier otro _.exe_
 
 O, si tienes **git** y **python3** instalado:
