@@ -9,7 +9,7 @@ This is a script made in python 3.7 that aids users in quickly creating and send
 
 # Installation
 
-Go to [the releases tab](https://github.com/PinkDev1/Terraria-Colourfull-Chat/releases) and download the latest version.
+Go to [the releases tab](https://github.com/ItsIgnacioPortal/Terraria-Colourfull-Chat/releases) and download the latest version.
 Once downloaded, just open it like any other .exe
 
 OR, if you have **git** and **python3** installed:
